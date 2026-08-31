@@ -1,0 +1,12 @@
+# amont-pack-java — Spotless for a JVM repository, Maven or Gradle.
+#
+# Every row is gated with `+` on the build file, so this pack is safe to add
+# anywhere: in a Maven repository the Gradle row stays inert, in a Gradle
+# repository the Maven row does, and in a repository with no Java at all
+# neither runs. `amont list` names which, and why.
+#
+# Adding a pack is not trusting it. Nothing here runs until you have read
+# these two commands and run `amont trust`.
+
+pre-commit  spotless-maven   *.java+pom.xml                        block  mvn -q spotless:check
+pre-commit  spotless-gradle  *.java+build.gradle,build.gradle.kts  block  ./gradlew -q spotlessCheck
