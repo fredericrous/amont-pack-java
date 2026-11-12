@@ -9,12 +9,12 @@ github:fredericrous/amont-pack-java @ 8f3c2a1 declares:
     pre-commit  spotless-maven   *.java+pom.xml                        block  mvn -q spotless:check
     pre-commit  spotless-gradle  *.java+build.gradle,build.gradle.kts  block  ./gradlew -q spotlessCheck
 
-amont.conf changed — these commands cannot run until you review them:
+greengate.conf changed — these commands cannot run until you review them:
     amont trust
 ```
 
 That second paragraph is not a formality. `amont add` copies text into your
-`amont.conf` and stops; the manifest's fingerprint changes, so **every**
+`greengate.conf` and stops; the manifest's fingerprint changes, so **every**
 declared check — these and any you wrote yourself — is inert until a human
 runs `amont trust`. Adding a pack is never the moment anything becomes
 runnable.
@@ -52,14 +52,14 @@ about whether it belongs in the tool.
 
 # Writing your own
 
-A pack is **any git repository with an `amont.pack` at its root**. That is the
+A pack is **any git repository with an `greengate.pack` at its root**. That is the
 entire requirement — no manifest schema, no registry, no build step. This
 repository is two files and one of them is the licence.
 
 ## The rows
 
-`amont.pack` is written in exactly the syntax of a repository's own
-[`amont.conf`](https://fredericrous.github.io/amont/custom-checks.html) —
+`greengate.pack` is written in exactly the syntax of a repository's own
+[`greengate.conf`](https://greenharness.github.io/greengate/custom-checks.html) —
 five whitespace-separated fields, `#` comments, blank lines ignored:
 
 ```
