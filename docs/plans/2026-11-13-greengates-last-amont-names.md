@@ -18,3 +18,7 @@ tag `v1.1.0` carries the change; the `v1` tag is never moved.
 ## Code review
 
 - amont-pack-java: none — markdown and pack comment text only
+
+## Implementation review
+
+- implementation-review: approve-with-changes, then approve (c8e07425). Fixed: the version floor names amont (greengate's name before 4.0). Withdrawn: the comment alignment.
