@@ -21,10 +21,11 @@ runnable.
 
 ## Which greengate you need
 
-Newer than **1.25.0**. In 1.25.0 and earlier the `+` opt-in was tested against
-the files you STAGED rather than the files the repository carries, so these
-rows ran only on a commit that also staged `pom.xml` — which is to say, almost
-never. Both rows here are gated, so on 1.25.0 this pack is effectively inert.
+Any greengate release, or amont newer than **1.25.0** (amont is greengate's name
+before 4.0). In amont 1.25.0 and earlier the `+` opt-in was tested against the
+files you STAGED rather than the files the repository carries, so these rows ran
+only on a commit that also staged `pom.xml` — which is to say, almost never.
+Both rows here are gated, so on amont 1.25.0 this pack is effectively inert.
 `greengate --version` tells you what you have.
 
 ## What you get
