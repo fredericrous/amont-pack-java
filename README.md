@@ -1,6 +1,6 @@
 # greengate-pack-java
 
-Spotless for a JVM repository, as a [greengate](https://github.com/fredericrous/greengate)
+Spotless for a JVM repository, as a [greengate](https://github.com/greenharness/greengate)
 pack. Two rows, one for Maven and one for Gradle.
 
 ```console
