@@ -1,53 +1,53 @@
-# amont-pack-java
+# greengate-pack-java
 
-Spotless for a JVM repository, as an [amont](https://github.com/fredericrous/amont)
+Spotless for a JVM repository, as a [greengate](https://github.com/fredericrous/greengate)
 pack. Two rows, one for Maven and one for Gradle.
 
 ```console
-$ amont add github:fredericrous/amont-pack-java@v1
-github:fredericrous/amont-pack-java @ 8f3c2a1 declares:
+$ greengate add github:fredericrous/greengate-pack-java@v1.1.0
+github:fredericrous/greengate-pack-java @ 8f3c2a1 declares:
     pre-commit  spotless-maven   *.java+pom.xml                        block  mvn -q spotless:check
     pre-commit  spotless-gradle  *.java+build.gradle,build.gradle.kts  block  ./gradlew -q spotlessCheck
 
 greengate.conf changed — these commands cannot run until you review them:
-    amont trust
+    greengate trust
 ```
 
-That second paragraph is not a formality. `amont add` copies text into your
+That second paragraph is not a formality. `greengate add` copies text into your
 `greengate.conf` and stops; the manifest's fingerprint changes, so **every**
 declared check — these and any you wrote yourself — is inert until a human
-runs `amont trust`. Adding a pack is never the moment anything becomes
+runs `greengate trust`. Adding a pack is never the moment anything becomes
 runnable.
 
-## Which amont you need
+## Which greengate you need
 
 Newer than **1.25.0**. In 1.25.0 and earlier the `+` opt-in was tested against
 the files you STAGED rather than the files the repository carries, so these
 rows ran only on a commit that also staged `pom.xml` — which is to say, almost
 never. Both rows here are gated, so on 1.25.0 this pack is effectively inert.
-`amont --version` tells you what you have.
+`greengate --version` tells you what you have.
 
 ## What you get
 
 Both rows run [Spotless](https://github.com/diffplug/spotless) in check mode
 on a commit that stages Java. Neither fixes anything: a pack that rewrites
 your working tree is a much larger thing to install than one that complains,
-and amont gates that separately behind `amont.fix` anyway.
+and greengate gates that separately behind `greengate.fix` anyway.
 
 Whichever build system you don't use stays inert, and says so:
 
 ```console
-$ amont list --all          # in a Maven repository
+$ greengate list --all          # in a Maven repository
   ● spotless-maven (declared)
   ○ spotless-gradle (declared)  inert here — needs .java + build.gradle | build.gradle.kts
 ```
 
 ## Why this is a pack and not a built-in
 
-amont ships ~37 built-in checks, chosen by how many repositories they light up
+greengate ships ~37 built-in checks, chosen by how many repositories they light up
 in. Docker, Helm and shell were worth building in. Java, like Ruby, PHP, .NET
 and Swift, was not — which is exactly the case packs exist for. A pack costs
-its author a repository and its user one `amont add`, and nobody has to argue
+its author a repository and its user one `greengate add`, and nobody has to argue
 about whether it belongs in the tool.
 
 # Writing your own
@@ -118,19 +118,19 @@ git tag v1.0.0 && git push origin v1.0.0
 git tag -f v1 && git push -f origin v1     # moving major alias, optional
 ```
 
-A moving alias is safe here in a way it is not for a CI action. `amont add`
+A moving alias is safe here in a way it is not for a CI action. `greengate add`
 resolves the ref with `git ls-remote` **before** fetching, refuses anything
 that isn't the commit it resolved, and writes the **commit id** — never the
-tag — into the consumer's manifest, between `# amont:pack:start` /
-`# amont:pack:end` markers. So `@v1` picks today's commit at install time and
-then stops moving. Re-running `amont add` replaces the block in place.
+tag — into the consumer's manifest, between `# greengate:pack:start` /
+`# greengate:pack:end` markers. So `@v1` picks today's commit at install time and
+then stops moving. Re-running `greengate add` replaces the block in place.
 
 `<source>` may be `github:owner/repo`, `forgejo:host/owner/repo`, or any git
 URL — including a local path, which is all you need to test a pack before you
 push it anywhere:
 
 ```sh
-amont add ../my-pack --dry-run
+greengate add ../my-pack --dry-run
 ```
 
 ## A limit to design around
